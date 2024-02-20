@@ -136,15 +136,3 @@ class RBinarySearchTree:
         mylist = self.dfs_in_order()
         return all(mylist[i] <= mylist[i+1] for i in range(len(mylist) - 1))
 
-new_tree = RBinarySearchTree()
-
-new_tree.r_insert(47)
-new_tree.r_insert(21)
-new_tree.r_insert(18)
-new_tree.r_insert(27)
-new_tree.r_insert(76)
-new_tree.r_insert(52)
-new_tree.r_insert(82)
-
-
-print(new_tree.DFSInOrder())
