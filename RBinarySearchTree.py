@@ -88,7 +88,53 @@ class RBinarySearchTree:
                 queue.append(current_node.right)
         
         return results
+    
 
+    def DFSPreorder(self):
+        results = []
+
+        def traverse(current_node):
+            results.append(current_node.value)
+            if current_node.left is not None:
+                traverse(current_node.left)
+            if current_node.right is not None:
+                traverse(current_node.right)
+
+        traverse(self.root)
+        return results
+
+
+    def DFSPostOrder(self):
+        results = []
+
+        def traverse(current_node):
+            if current_node.left is not None:
+                traverse(current_node.left)
+            if current_node.right is not None:
+                traverse(current_node.right)
+            results.append(current_node.value)
+
+        traverse(self.root)
+        return results
+
+
+    def DFSInOrder(self):
+        results = []
+
+        def traverse(current_node):
+            if current_node.left is not None:
+                traverse(current_node.left)
+            results.append(current_node.value)
+            if current_node.right is not None:
+                traverse(current_node.right)
+
+        traverse(self.root)
+        return results
+
+
+    def is_valid_bst(self):
+        mylist = self.dfs_in_order()
+        return all(mylist[i] <= mylist[i+1] for i in range(len(mylist) - 1))
 
 new_tree = RBinarySearchTree()
 
@@ -101,4 +147,4 @@ new_tree.r_insert(52)
 new_tree.r_insert(82)
 
 
-print(new_tree.BFS())
+print(new_tree.DFSInOrder())
