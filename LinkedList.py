@@ -238,3 +238,80 @@ class LinkedList:
             previous_node.next = node_to_move
             
         self.head = dummy.next   
+
+
+    def bubble_sort(self):
+        if self.length < 2:
+            return
+        
+        sorted_until = None
+        
+        while sorted_until != self.head.next:
+            current = self.head
+            while current.next != sorted_until:
+                next_node = current.next
+                if current.value > next_node.value:
+                    current.value, next_node.value = next_node.value, current.value
+                current = current.next
+            sorted_until = current
+
+    def selection_sort(self):
+        if self.length < 2:
+            return
+        current = self.head
+        while current.next:
+            smallest = current
+            inner_current = current.next
+            while inner_current:
+                if inner_current.value < smallest.value:
+                    smallest = inner_current
+                inner_current = inner_current.next
+                    
+            if smallest != current:
+                current.value, smallest.value = smallest.value, current.value        
+            current = current.next
+
+
+    def insertion_sort(self):
+        if self.length < 2:
+            return
+        
+        sorted_list_head = self.head
+        unsorted_list_head = self.head.next
+        sorted_list_head.next = None
+        
+        while unsorted_list_head:
+            current = unsorted_list_head
+            unsorted_list_head = unsorted_list_head.next
+            
+            if current.value < sorted_list_head.value:
+                current.next = sorted_list_head
+                sorted_list_head = current
+            else:
+                search_pointer = sorted_list_head
+                while search_pointer.next and current.value > search_pointer.next.value:
+                    search_pointer = search_pointer.next
+                current.next = search_pointer.next
+                search_pointer.next = current
+        
+        self.head = sorted_list_head
+        temp = self.head
+        while temp.next:
+            temp = temp.next
+        self.tail = temp
+        
+
+my_linked_list = LinkedList(4)
+my_linked_list.append(2)
+my_linked_list.append(6)
+my_linked_list.append(5)
+my_linked_list.append(1)
+my_linked_list.append(3)
+
+print("Linked List Before Sort:")
+my_linked_list.print_list()
+
+my_linked_list.insertion_sort()
+
+print("\nSorted Linked List:")
+my_linked_list.print_list()
