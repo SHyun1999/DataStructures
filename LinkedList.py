@@ -301,17 +301,26 @@ class LinkedList:
         self.tail = temp
         
 
-my_linked_list = LinkedList(4)
-my_linked_list.append(2)
-my_linked_list.append(6)
-my_linked_list.append(5)
-my_linked_list.append(1)
-my_linked_list.append(3)
+    def merge_sorted_lists(self, other_list):
+        other_head = other_list.head
+        dummy = Node(0)
+        current = dummy
+ 
+        while self.head and other_head:
+            if self.head.value < other_head.value:
+                current.next = self.head
+                self.head = self.head.next
+            else:
+                current.next = other_head
+                other_head = other_head.next
+            current = current.next
+ 
+        if self.head:
+            current.next = self.head
+        else:
+            current.next = other_head
+            self.tail = other_list.tail
+ 
+        self.head = dummy.next
+        self.length += other_list.length
 
-print("Linked List Before Sort:")
-my_linked_list.print_list()
-
-my_linked_list.insertion_sort()
-
-print("\nSorted Linked List:")
-my_linked_list.print_list()
