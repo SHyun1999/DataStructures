@@ -136,3 +136,27 @@ class RBinarySearchTree:
         mylist = self.dfs_in_order()
         return all(mylist[i] <= mylist[i+1] for i in range(len(mylist) - 1))
 
+
+
+    def getTargetCopy(self, original, cloned, target):
+
+        def traverse(current_node):
+            if current_node.left:
+                traverse(current_node.left)
+            if current_node.right:
+                traverse(current_node.right)
+            if current_node.value == target.value:
+                return current_node
+            
+            return None
+
+        return traverse(cloned)
+    
+
+tree = RBinarySearchTree()
+
+tree.r_insert(7)
+tree.r_insert(4)
+tree.r_insert(3)
+tree.r_insert(6)
+tree.r_insert(19)

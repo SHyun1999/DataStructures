@@ -98,3 +98,19 @@ def quick_sort_helper(my_list, left, right):
 def quick_sort(my_list):
     return quick_sort_helper(my_list, 0, len(my_list) - 1)
 
+
+def removeElement(nums: list[int], val: int) -> int:
+    length_before = len(nums)
+
+    nums = [n for n in nums if n != val]
+    print(nums)
+
+    length_after = len(nums)
+
+    return length_before - length_after
+
+
+# Example usage
+nums = [3, 2, 2, 3]
+val = 3
+print(removeElement(nums, val))  # Output: 2
